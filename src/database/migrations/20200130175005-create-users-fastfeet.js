@@ -17,10 +17,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      password_hash: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       administrator: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
