@@ -4,7 +4,6 @@ import * as Yup from 'yup';
 class ControllerRecipients {
   async store(req, res){
     const schema = Yup.object().shape({
-      user_id: Yup.number().required(),
       street: Yup.string().required(),
       number: Yup.number().required(),
       complement: Yup.string().required(),
@@ -15,8 +14,20 @@ class ControllerRecipients {
 
     if(! (await schema.isValid(req.body))){
       return res.status(400).json({ error: 'Validation error' });
-    }
-    return res.json({ ok: true });
+    };
+
+    const { id, street, number, complement, state, city, postal_code } = 
+    await Recipient.create(req.body);
+    
+    return res.json({ 
+      id,
+      street,
+      number,
+      complement,
+      state,
+      city,
+      postal_code,
+     });
 
   }
 
