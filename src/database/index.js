@@ -1,6 +1,6 @@
 import Sequelize from 'sequelize';
 
-import User from '../app/models/User';
+import User from '../app/models/Users';
 import Recipients from '../app/models/Recipients';
 
 

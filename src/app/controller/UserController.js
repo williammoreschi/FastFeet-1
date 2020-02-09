@@ -1,7 +1,9 @@
-import User from '../models/User';
+import User from '../models/Users';
 
 class UserController  {
   async store(req, res) {
+
+    //Autentication by the email
     const userExist =await User.findOne({ where: { email: req.body.email } });
 
     if(userExist){
