@@ -12,14 +12,15 @@ class SessionController {
     if(!user){
       return res.status(401).json({ error: 'User not found' });
     }
-
-    const { id, name } = user;
+    
+    const { id, name, password_hash } = user;
 
     return res.json({
       user: {
         id,
         name,
         email,
+        password_hash,
       },
       token: jwt.sign({ id }, authConfig.secret, {
         expiresIn: authConfig.expiresIn,
