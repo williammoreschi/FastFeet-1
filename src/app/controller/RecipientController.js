@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 class ControllerRecipients {
   async store(req, res){
     const schema = Yup.object().shape({
+      name: Yup.string().required(),
       street: Yup.string().required(),
       number: Yup.number().required(),
       complement: Yup.string().required(),
@@ -18,25 +19,21 @@ class ControllerRecipients {
       return res.status(400).json({ error: 'Validation error' });
     };
 
-    /**
-     * Check if the user is a admnistrator
-    **/
-
     const checkIsAdministrator = await User.findOne({
-      where: { id: req.userId, Administrator: true }
+      where: { id: req.userId, administrator: true }
     });
 
-    if(! (await checkIsAdministrator.isValid(req.body))){
+    if(!checkIsAdministrator){
       return res.status(401).json({ 
         error: 'Normally users can not create recipients'
       });
     }
 
-    const { id, street, number, complement, state, city, postal_code } = 
+    const { name, street, number, complement, state, city, postal_code } = 
     await Recipient.create(req.body);
     
-    return res.json({ 
-      id,
+    return res.json({
+      name,
       street,
       number,
       complement,
@@ -45,11 +42,6 @@ class ControllerRecipients {
       postal_code,
      });
 
-  }
-
-  async index(req, res) {
-    
-    return res.json({ ok: true });
   }
 
   async update(req, res) {
