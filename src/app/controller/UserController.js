@@ -62,7 +62,7 @@ class UserController  {
      * Check after the usuability for the userExist validation
      */
 
-    if(email !== user.email) {
+    if(email && email !== user.email) {
       const userExist = await User.findOne({ where: { email }});
 
       if(userExist){

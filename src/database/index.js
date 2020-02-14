@@ -3,7 +3,7 @@ import Sequelize from 'sequelize';
 import User from '../app/models/Users';
 import Recipient from '../app/models/Recipients';
 import File from '../app/models/Files';
-import Delivery from '../app/models/Delivery';
+import Delivery from '../app/models/Deliverys';
 
 
 import databaseConfig from '../config/database';
