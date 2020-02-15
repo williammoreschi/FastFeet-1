@@ -12,9 +12,14 @@ class Deliverys extends Model{
         sequelize,
       }
     );
-    
-    return this;
+
+      return this;
   }
+
+  static associate(models){
+    this.belongsTo(models.Files, { foreignKey: 'avatar_id' });
+  }
+
 }
 
 export default Deliverys;
