@@ -3,7 +3,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.addColumn(
-      'delivery',
+      'deliverys',
       'avatar_id',
       {
         type: Sequelize.INTEGER,
@@ -15,7 +15,7 @@ module.exports = {
     );
   },
 
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.removeColumn('delivery', 'avatar_id')
+  down: (queryInterface) => {
+    return queryInterface.removeColumn('deliverys', 'avatar_id')
   }
 };

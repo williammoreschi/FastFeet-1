@@ -13,11 +13,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      avatar_id:{
-        autoIncrement: true,
-        allowNull: false,
-        type: Sequelize.INTEGER,
-      },
       email:{
         allowNull: false,
         type: Sequelize.STRING
