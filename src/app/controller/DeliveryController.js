@@ -84,11 +84,8 @@ class DeliveryController {
 
     const { id, name } = await delivery.update(req.body);
 
-    return res.json({
-      id,
-      name,
-      email,
-    });
+    return res.json( { email_enviado: email } );
+
   }
 }
 
