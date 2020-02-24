@@ -42,7 +42,7 @@ class DeliveryController {
 
   async index(req, res) {
     const deliverys = await Delivery.findAll(
-      console.log('Check deliverys routes'),
+      console.log('Check index deliverys routes'),
       {
       attributes: [ 'id', 'name', 'email', 'avatar_id' ],
       include: [
@@ -60,23 +60,35 @@ class DeliveryController {
   async update(req, res) {
     const schema = Yup.object().shape({
     name: Yup.string().required(),
-    email: Yup.string().required(),
+    email: Yup.string().required().email(),
     avatar_id: Yup.number().required(),
     });
 
-    if(! (schema.isValid(req.body))) {
-      return res.status(401).json({ error: 'Validation error'});
+    console.log('check updated deliverys routes');
+
+    if(!(schema.isValid(req.body))){
+      return res.status(400).json({ error: 'Validation error' });
     }
 
     const { email } = req.body;
+
+    const delivery = await Delivery.findByPk(req.userId);
     
     if(email !== delivery.email) {
       const deliveryExist = await Delivery.findOne({ where: { email }});
-    
-      if(deliveryExist) {
-        return res.status(401).json({ error: 'email does not match with anyone'});
+
+      if(deliveryExist){
+        return res.status(400).json({error: 'Delivery email already exist.'})
       }
     }
+
+    const { id, name } = await delivery.update(req.body);
+
+    return res.json({
+      id,
+      name,
+      email,
+    });
   }
 }
 
