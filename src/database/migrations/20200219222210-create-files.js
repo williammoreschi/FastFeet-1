@@ -3,9 +3,9 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('files', {
-      id:{
+      id: {
         autoIncrement: true,
-        primarykey: true,
+        primaryKey: true,
         allowNull: false,
         type: Sequelize.INTEGER,
       },

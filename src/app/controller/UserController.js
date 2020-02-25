@@ -48,7 +48,7 @@ class UserController  {
         oldPassword ? field.required() : field
         ),
       administrator: Yup.boolean(),
-    })
+    });
 
     if(!(await schema.isValid(req.body))) {
       return res.status(401).json({ error: 'Validation error' });
@@ -73,7 +73,7 @@ class UserController  {
     if(oldPassword && !(await user.checkPassworld(oldPassword))){
       return res.status(401).json({ error: 'Password does not match' });
     }
-
+    
     const { id, name, administrator } = await user.update(req.body);
 
     return res.json({ 

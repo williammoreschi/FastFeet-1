@@ -22,7 +22,6 @@ class ControllerRecipients {
     const checkIsAdministrator = await User.findOne({
       where: { id: req.userId, administrator: true }
     });
-
     if(!checkIsAdministrator){
       return res.status(401).json({ 
         error: 'Normally users can not create recipients'
